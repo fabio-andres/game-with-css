@@ -4,7 +4,7 @@ movies search app consuming movie db api
 
 ## Preview
 
-![](https://github.com/fabio-andres/only-movies/blob/main/Captura%20de%20pantalla%202022-08-14%20001551.png)
+![](https://github.com/fabio-andres/game-with-css/blob/master/Captura%20de%20pantalla%202022-08-18%20014434.png)
 
 ## Getting Started 🚀
 
