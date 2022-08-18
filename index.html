@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --dark-brown: #a54a38;
+            --light-brown: #bf624c;
+            --dark-green: #51af5e;
+            --light-green: #51af5e;
+            --shadow: 0 19px 38px rgba(0, 0, 0, 0.30),
+                0 15px 12px rgba(0, 0, 0, 0.22);
+        }
+
+        body {
+            display: grid;
+            counter-reset: score;
+            height: 100vh;
+            margin: 0;
+            place-items: center;
+            width: 100%;
+        }
+
+
+        .canvas {
+            display: grid;
+            grid-template: repeat(16, 5px) / repeat(13, 5px);
+            justify-content: center;
+            position: relative;
+            bottom: 80px;
+            grid-template-areas:
+                ".       .       .    hat    hat    hat    hat    hat    hat        .       .       .       ."
+                ".       .      hat2  hat2   hat2   hat2   hat2   hat2   hat2      hat2    hat2    hat2     ."
+                ".       .      hair  hair   hair   head   head   head   eye       head2    .       .       ."
+                ".     hair3    ear   hair2  head3  head3  head3  head3  eye       nose    nose    nose     ."
+                ".     hair3    ear   hair4  hair4  head4  head4  head4  head4     moust   nose2   nose2  nose2"
+                ".     hair3    hair5 head5  head5  head5  head5  head5  moust2    moust2  moust2  moust2   .  "
+                ".       .       .    head6  head6  head6  head6  head6  head6     head6   head6      .     .  "
+                ".       .     shirt  shirt  jean   shirt2 shirt2 shirt2 shirt2      .       .        .     .  "
+                ".     shirt3  shirt3 shirt3 jean   shirt4 shirt4 jean2  shirt5    shirt5  shirt5     .     .  "
+                "shirt6   shirt6  shirt6 shirt6 jean   jean3  jean3  jean3  shirt7    shirt7  shirt7   shirt7  .  "
+                "hand     hand    shirt8 jean4  button jean5  jean5  button2 jean6    shirt9  hand2     hand2  .  "
+                "hand3    hand3   hand3  jean7  jean7  jean7  jean7  jean7  jean7     hand4   hand4     hand4  .  "
+                "hand5    hand5   jean8  jean8  jean8  jean8  jean8  jean8  jean8     jean8   hand6     hand6  .  "
+                "  .        .     jean9  jean9  jean9    .    .      jean10  jean10   jean10     .        .    .  "
+                "  .      shoe    shoe   shoe     .      .    .         .     shoe2  shoe2    shoe2       .    .  "
+                "shoe3    shoe3   shoe3  shoe3    .      .    .         .     shoe4    shoe4   shoe4  shoe4     .  ";
+        }
+
+        .canvas__hat {
+            grid-area: hat;
+            background-color: red;
+        }
+
+        .canvas__hat2 {
+            grid-area: hat2;
+            background-color: red;
+        }
+
+        .canvas__hair {
+            grid-area: hair;
+            background-color: #9b4f00;
+        }
+
+        .canvas__head {
+            grid-area: head;
+            background-color: #fed291;
+        }
+
+        .canvas__eye {
+            grid-area: eye;
+            background-color: black;
+        }
+
+        .canvas__head2 {
+            grid-area: head2;
+            background-color: #fed291;
+        }
+
+        .canvas__hair2 {
+            grid-area: hair2;
+            background-color: #9b4f00;
+        }
+
+        .canvas__hair3 {
+            grid-area: hair3;
+            background-color: #9b4f00;
+        }
+
+        .canvas__ear {
+            grid-area: ear;
+            background-color: #fed291;
+        }
+
+        .canvas__head3 {
+            grid-area: head3;
+            background-color: #fed291;
+        }
+
+        .canvas__nose {
+            grid-area: nose;
+            background-color: #fed291;
+        }
+
+        .canvas__nose2 {
+            grid-area: nose2;
+            background-color: #fed291;
+        }
+
+        .canvas__head4 {
+            grid-area: head4;
+            background-color: #fed291;
+        }
+
+        .canvas__hair4 {
+            grid-area: hair4;
+            background-color: #9b4f00;
+        }
+
+        .canvas__moust {
+            grid-area: moust;
+            background-color: black;
+        }
+
+        .canvas__hair5 {
+            grid-area: hair5;
+            background-color: #9b4f00;
+        }
+
+        .canvas__head5 {
+            grid-area: head5;
+            background-color: #fed291;
+        }
+
+        .canvas__moust2 {
+            grid-area: moust2;
+            background-color: black;
+        }
+
+        .canvas__head6 {
+            grid-area: head6;
+            background-color: #fed291;
+        }
+
+        .canvas__shirt {
+            grid-area: shirt;
+            background-color: red;
+        }
+
+        .canvas__jean {
+            grid-area: jean;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean2 {
+            grid-area: jean2;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean3 {
+            grid-area: jean3;
+            background-color: #4c00df;
+        }
+
+        .canvas__shirt2 {
+            grid-area: shirt2;
+            background-color: red;
+        }
+
+        .canvas__shirt3 {
+            grid-area: shirt3;
+            background-color: red;
+        }
+
+        .canvas__shirt4 {
+            grid-area: shirt4;
+            background-color: red;
+        }
+
+        .canvas__shirt5 {
+            grid-area: shirt5;
+            background-color: red;
+        }
+
+        .canvas__shirt6 {
+            grid-area: shirt6;
+            background-color: red;
+        }
+
+        .canvas__shirt7 {
+            grid-area: shirt7;
+            background-color: red;
+        }
+
+        .canvas__shirt8 {
+            grid-area: shirt8;
+            background-color: red;
+        }
+
+        .canvas__shirt9 {
+            grid-area: shirt9;
+            background-color: red;
+        }
+
+        .canvas__hand {
+            grid-area: hand;
+            background-color: #fed291;
+        }
+
+        .canvas__hand2 {
+            grid-area: hand2;
+            background-color: #fed291;
+        }
+
+        .canvas__jean4 {
+            grid-area: jean4;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean5 {
+            grid-area: jean5;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean6 {
+            grid-area: jean6;
+            background-color: #4c00df;
+        }
+
+        .canvas__button {
+            grid-area: button;
+            background-color: yellow;
+        }
+
+        .canvas__button2 {
+            grid-area: button2;
+            background-color: yellow;
+        }
+
+        .canvas__jean7 {
+            grid-area: jean7;
+            background-color: #4c00df;
+        }
+
+        .canvas__hand3 {
+            grid-area: hand3;
+            background-color: #fed291;
+        }
+
+        .canvas__hand4 {
+            grid-area: hand4;
+            background-color: #fed291;
+        }
+
+        .canvas__hand5 {
+            grid-area: hand5;
+            background-color: #fed291;
+        }
+
+        .canvas__hand6 {
+            grid-area: hand6;
+            background-color: #fed291;
+        }
+
+        .canvas__jean8 {
+            grid-area: jean8;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean9 {
+            grid-area: jean9;
+            background-color: #4c00df;
+        }
+
+        .canvas__jean10 {
+            grid-area: jean10;
+            background-color: #4c00df;
+        }
+
+        .canvas__shoe {
+            grid-area: shoe;
+            background-color: #9b4f00;
+        }
+
+        .canvas__shoe2 {
+            grid-area: shoe2;
+            background-color: #9b4f00;
+        }
+
+        .canvas__shoe3 {
+            grid-area: shoe3;
+            background-color: #9b4f00;
+        }
+
+        .canvas__shoe4 {
+            grid-area: shoe4;
+            background-color: #9b4f00;
+        }
+
+
+
+        .lawn {
+            background: var(--dark-green);
+            height: 20px;
+            width: 100%;
+        }
+
+        .land {
+            background: linear-gradient(135deg, var(--dark-green) 25%, transparent 25%) -50px 0,
+                linear-gradient(-135deg, var(--dark-green) 25%, transparent 25%) -50px 0,
+                linear-gradient(45deg, var(--light-brown) 25%, transparent 25%),
+                linear-gradient(-45deg, transparent 25%, var(--dark-brown) 25%);
+            background-size: 33px 30px;
+            height: 30px;
+            width: 100%;
+        }
+
+        .phone {
+            background: #CCEFFF;
+            border: 8px solid black;
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+            /* After */
+            overflow: hidden;
+            /* After */
+            height: 600px;
+            position: relative;
+            width: 300px;
+        }
+
+        input[type=checkbox] {
+            appearance: none;
+            cursor: pointer;
+            height: 50px;
+            margin: 0;
+            position: relative;
+            top: 0;
+            width: 80px;
+            z-index: 2;
+        }
+
+        input[type=checkbox]:focus {
+            appearance: none;
+            outline: none;
+        }
+
+        input:checked {
+            counter-increment: score;
+        }
+
+        .score::after {
+            content: counter(score);
+        }
+
+        /* animacion de subir y bajar de mario y del checkbox */
+        @keyframes layer {
+            0% {
+                bottom: 0;
+            }
+
+            25% {
+                bottom: -80px;
+            }
+
+            100% {
+                bottom: 0;
+            }
+        }
+
+        .layer-1 {
+            /*   background: white; */
+            bottom: 0;
+            height: 450px;
+            position: absolute;
+            right: 60px;
+            width: 80px;
+
+            /* After 4 */
+            animation-name: layer;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        } 
+
+        .layer-2 {
+            /*   background: white; */
+            /* After 3 */
+            bottom: 0;
+            height: 450px;
+            position: absolute;
+            left: 60px;
+            width: 80px;
+            z-index: 2;
+
+            /* After 4 */
+            animation-name: layer;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .layer-3 {
+            background: var(--light-brown);
+            /* After */
+            border-radius: 20px;
+            /* After */
+            box-shadow: var(--shadow);
+            /* After */
+            bottom: 0;
+            height: 400px;
+            left: 0;
+            margin: 0 auto;
+            overflow: hidden;
+            /* After */
+            position: absolute;
+            right: 0;
+            width: 220px;
+            z-index: 3;
+        }
+
+        .layer-4 {
+            /*   background: white; */
+            /* After 3 */
+            bottom: 0;
+            height: 350px;
+            left: 15px;
+            position: absolute;
+            width: 80px;
+            z-index: 4;
+
+            /* After 4 */
+            animation-name: layer;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+
+        .layer-5 {
+            background: var(--light-brown);
+            /* After */
+            border-radius: 20px;
+            /* After */
+            box-shadow: var(--shadow);
+            /* After */
+            bottom: 0;
+            height: 300px;
+            overflow: hidden;
+            /* After */
+            position: absolute;
+            width: 200px;
+            z-index: 5;
+        }
+
+        .layer-6 {
+            /*   background: white; */
+            /* After 3 */
+            bottom: 0;
+            height: 250px;
+            position: absolute;
+            right: 30px;
+            width: 80px;
+            z-index: 6;
+
+            /* After 4 */
+            animation-name: layer;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .layer-7 {
+            background: var(--light-brown);
+            /* After */
+            border-radius: 20px;
+            /* After */
+            box-shadow: var(--shadow);
+            /* After */
+            bottom: 0;
+            height: 200px;
+            overflow: hidden;
+            /* After */
+            position: absolute;
+            right: 0;
+            width: 150px;
+            z-index: 7;
+        }
+
+        .layer-8 {
+            /*   background: papayawhip; */
+            bottom: 0;
+            height: 120px;
+            left: 0;
+            margin: 0 auto;
+            position: absolute;
+            right: 0;
+            width: 200px;
+            z-index: 8;
+        }
+
+        .layer-8__left-lawn {
+            background: var(--dark-green);
+            border-radius: 40px 40px 0 0;
+            bottom: 0;
+            display: inline-block;
+            height: 70%;
+            left: 0;
+            position: absolute;
+            width: 80px;
+        }
+
+        .layer-8__center-lawn {
+            background: var(--dark-green);
+            border-radius: 40px 40px 0 0;
+            bottom: 0;
+            display: inline-block;
+            height: 100%;
+            left: 60px;
+            position: absolute;
+            width: 80px;
+        }
+
+        .layer-8__right-lawn {
+            background: var(--dark-green);
+            border-radius: 40px 40px 0 0;
+            bottom: 0;
+            display: inline-block;
+            height: 80%;
+            left: 130px;
+            position: absolute;
+            width: 80px;
+        }
+
+        .layer-9 {
+            /*   background: white; */
+            bottom: 0;
+            height: 100px;
+            position: absolute;
+            width: 120px;
+            z-index: 9;
+        }
+
+        .layer-9__left-cloud {
+            background: white;
+            border-radius: 40px 40px 0 0;
+            display: inline-block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 80px;
+        }
+
+        .layer-9__right-cloud {
+            background: white;
+            border-radius: 0 40px 30px 0;
+            bottom: 0;
+            display: inline-block;
+            height: 60%;
+            left: 80px;
+            position: absolute;
+            width: 40px;
+        }
+
+        .layer-10 {
+            /*   background: pink; */
+            bottom: 0;
+            height: 100px;
+            position: absolute;
+            right: 0;
+            width: 120px;
+            z-index: 10;
+        }
+
+        .layer-10__left-cloud {
+            background: white;
+            border-radius: 40px 0 0 30px;
+            bottom: 0;
+            display: inline-block;
+            height: 60%;
+            right: 80px;
+            position: absolute;
+            width: 40px;
+        }
+
+        .layer-10__right-cloud {
+            background: white;
+            border-radius: 40px 40px 0 0;
+            display: inline-block;
+            height: 100%;
+            right: 0px;
+            position: absolute;
+            width: 80px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+            margin: 45px 0 10px;
+        }
+    
+        .score {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone">
+
+        <div class="layer-1">
+            <input type="checkbox">
+            <div class="canvas">
+                <div class="canvas__hat"></div>
+                <div class="canvas__hat2"></div>
+                <div class="canvas__hair"></div>
+                <div class="canvas__head"></div>
+                <div class="canvas__eye"></div>
+                <div class="canvas__head2"></div>
+                <div class="canvas__hair2"></div>
+                <div class="canvas__hair3"></div>
+                <div class="canvas__ear"></div>
+                <div class="canvas__head3"></div>
+                <div class="canvas__nose"></div>
+                <div class="canvas__hair4"></div>
+                <div class="canvas__head4"></div>
+                <div class="canvas__moust"></div>
+                <div class="canvas__nose2"></div>
+                <div class="canvas__hair5"></div>
+                <div class="canvas__head5"></div>
+                <div class="canvas__moust2"></div>
+                <div class="canvas__head6"></div>
+                <div class="canvas__shirt"></div>
+                <div class="canvas__jean"></div>
+                <div class="canvas__shirt2"></div>
+                <div class="canvas__shirt3"></div>
+                <div class="canvas__shirt4"></div>
+                <div class="canvas__shirt5"></div>
+                <div class="canvas__shirt6"></div>
+                <div class="canvas__shirt7"></div>
+                <div class="canvas__jean2"></div>
+                <div class="canvas__jean3"></div>
+                <div class="canvas__jean4"></div>
+                <div class="canvas__jean5"></div>
+                <div class="canvas__jean6"></div>
+                <div class="canvas__jean7"></div>
+                <div class="canvas__jean8"></div>
+                <div class="canvas__hand"></div>
+                <div class="canvas__hand2"></div>
+                <div class="canvas__hand3"></div>
+                <div class="canvas__hand4"></div>
+                <div class="canvas__hand5"></div>
+                <div class="canvas__hand6"></div>
+                <div class="canvas__button"></div>
+                <div class="canvas__button2"></div>
+                <div class="canvas__shirt8"></div>
+                <div class="canvas__shirt9"></div>
+                <div class="canvas__jean9"></div>
+                <div class="canvas__jean10"></div>
+                <div class="canvas__shoe"></div>
+                <div class="canvas__shoe2"></div>
+                <div class="canvas__shoe3"></div>
+                <div class="canvas__shoe4"></div>
+            </div>
+        </div>
+
+        <div class="layer-2">
+            <input type="checkbox">
+            <div class="canvas">
+                <div class="canvas__hat"></div>
+                <div class="canvas__hat2"></div>
+                <div class="canvas__hair"></div>
+                <div class="canvas__head"></div>
+                <div class="canvas__eye"></div>
+                <div class="canvas__head2"></div>
+                <div class="canvas__hair2"></div>
+                <div class="canvas__hair3"></div>
+                <div class="canvas__ear"></div>
+                <div class="canvas__head3"></div>
+                <div class="canvas__nose"></div>
+                <div class="canvas__hair4"></div>
+                <div class="canvas__head4"></div>
+                <div class="canvas__moust"></div>
+                <div class="canvas__nose2"></div>
+                <div class="canvas__hair5"></div>
+                <div class="canvas__head5"></div>
+                <div class="canvas__moust2"></div>
+                <div class="canvas__head6"></div>
+                <div class="canvas__shirt"></div>
+                <div class="canvas__jean"></div>
+                <div class="canvas__shirt2"></div>
+                <div class="canvas__shirt3"></div>
+                <div class="canvas__shirt4"></div>
+                <div class="canvas__shirt5"></div>
+                <div class="canvas__shirt6"></div>
+                <div class="canvas__shirt7"></div>
+                <div class="canvas__jean2"></div>
+                <div class="canvas__jean3"></div>
+                <div class="canvas__jean4"></div>
+                <div class="canvas__jean5"></div>
+                <div class="canvas__jean6"></div>
+                <div class="canvas__jean7"></div>
+                <div class="canvas__jean8"></div>
+                <div class="canvas__hand"></div>
+                <div class="canvas__hand2"></div>
+                <div class="canvas__hand3"></div>
+                <div class="canvas__hand4"></div>
+                <div class="canvas__hand5"></div>
+                <div class="canvas__hand6"></div>
+                <div class="canvas__button"></div>
+                <div class="canvas__button2"></div>
+                <div class="canvas__shirt8"></div>
+                <div class="canvas__shirt9"></div>
+                <div class="canvas__jean9"></div>
+                <div class="canvas__jean10"></div>
+                <div class="canvas__shoe"></div>
+                <div class="canvas__shoe2"></div>
+                <div class="canvas__shoe3"></div>
+                <div class="canvas__shoe4"></div>
+
+            </div>
+        </div>
+
+        <div class="layer-3">
+            <div class="lawn"></div>
+            <div class="land"></div>
+        </div>
+
+        <div class="layer-4">
+            <input type="checkbox">
+            <div class="canvas">
+                <div class="canvas__hat"></div>
+                <div class="canvas__hat2"></div>
+                <div class="canvas__hair"></div>
+                <div class="canvas__head"></div>
+                <div class="canvas__eye"></div>
+                <div class="canvas__head2"></div>
+                <div class="canvas__hair2"></div>
+                <div class="canvas__hair3"></div>
+                <div class="canvas__ear"></div>
+                <div class="canvas__head3"></div>
+                <div class="canvas__nose"></div>
+                <div class="canvas__hair4"></div>
+                <div class="canvas__head4"></div>
+                <div class="canvas__moust"></div>
+                <div class="canvas__nose2"></div>
+                <div class="canvas__hair5"></div>
+                <div class="canvas__head5"></div>
+                <div class="canvas__moust2"></div>
+                <div class="canvas__head6"></div>
+                <div class="canvas__shirt"></div>
+                <div class="canvas__jean"></div>
+                <div class="canvas__shirt2"></div>
+                <div class="canvas__shirt3"></div>
+                <div class="canvas__shirt4"></div>
+                <div class="canvas__shirt5"></div>
+                <div class="canvas__shirt6"></div>
+                <div class="canvas__shirt7"></div>
+                <div class="canvas__jean2"></div>
+                <div class="canvas__jean3"></div>
+                <div class="canvas__jean4"></div>
+                <div class="canvas__jean5"></div>
+                <div class="canvas__jean6"></div>
+                <div class="canvas__jean7"></div>
+                <div class="canvas__jean8"></div>
+                <div class="canvas__hand"></div>
+                <div class="canvas__hand2"></div>
+                <div class="canvas__hand3"></div>
+                <div class="canvas__hand4"></div>
+                <div class="canvas__hand5"></div>
+                <div class="canvas__hand6"></div>
+                <div class="canvas__button"></div>
+                <div class="canvas__button2"></div>
+                <div class="canvas__shirt8"></div>
+                <div class="canvas__shirt9"></div>
+                <div class="canvas__jean9"></div>
+                <div class="canvas__jean10"></div>
+                <div class="canvas__shoe"></div>
+                <div class="canvas__shoe2"></div>
+                <div class="canvas__shoe3"></div>
+                <div class="canvas__shoe4"></div>
+
+            </div>
+        </div>
+
+        <div class="layer-5">
+            <div class="lawn"></div>
+            <div class="land"></div>
+        </div>
+
+        <div class="layer-6">
+            <input type="checkbox">
+            <div class="canvas">
+                <div class="canvas__hat"></div>
+                <div class="canvas__hat2"></div>
+                <div class="canvas__hair"></div>
+                <div class="canvas__head"></div>
+                <div class="canvas__eye"></div>
+                <div class="canvas__head2"></div>
+                <div class="canvas__hair2"></div>
+                <div class="canvas__hair3"></div>
+                <div class="canvas__ear"></div>
+                <div class="canvas__head3"></div>
+                <div class="canvas__nose"></div>
+                <div class="canvas__hair4"></div>
+                <div class="canvas__head4"></div>
+                <div class="canvas__moust"></div>
+                <div class="canvas__nose2"></div>
+                <div class="canvas__hair5"></div>
+                <div class="canvas__head5"></div>
+                <div class="canvas__moust2"></div>
+                <div class="canvas__head6"></div>
+                <div class="canvas__shirt"></div>
+                <div class="canvas__jean"></div>
+                <div class="canvas__shirt2"></div>
+                <div class="canvas__shirt3"></div>
+                <div class="canvas__shirt4"></div>
+                <div class="canvas__shirt5"></div>
+                <div class="canvas__shirt6"></div>
+                <div class="canvas__shirt7"></div>
+                <div class="canvas__jean2"></div>
+                <div class="canvas__jean3"></div>
+                <div class="canvas__jean4"></div>
+                <div class="canvas__jean5"></div>
+                <div class="canvas__jean6"></div>
+                <div class="canvas__jean7"></div>
+                <div class="canvas__jean8"></div>
+                <div class="canvas__hand"></div>
+                <div class="canvas__hand2"></div>
+                <div class="canvas__hand3"></div>
+                <div class="canvas__hand4"></div>
+                <div class="canvas__hand5"></div>
+                <div class="canvas__hand6"></div>
+                <div class="canvas__button"></div>
+                <div class="canvas__button2"></div>
+                <div class="canvas__shirt8"></div>
+                <div class="canvas__shirt9"></div>
+                <div class="canvas__jean9"></div>
+                <div class="canvas__jean10"></div>
+                <div class="canvas__shoe"></div>
+                <div class="canvas__shoe2"></div>
+                <div class="canvas__shoe3"></div>
+                <div class="canvas__shoe4"></div>
+
+            </div>
+        </div>
+
+        <div class="layer-7">
+            <div class="lawn"></div>
+            <div class="land"></div>
+        </div>
+
+        <div class="layer-8">
+            <div class="layer-8__left-lawn"></div>
+            <div class="layer-8__center-lawn"></div>
+            <div class="layer-8__right-lawn"></div>
+        </div>
+
+        <div class="layer-9">
+            <div class="layer-9__left-cloud"></div>
+            <div class="layer-9__right-cloud"></div>
+        </div>
+
+        <div class="layer-10">
+            <div class="layer-10__left-cloud"></div>
+            <div class="layer-10__right-cloud"></div>
+        </div>
+
+        <h1 class="title">
+            CSS ANIMATION
+        </h1>
+        <h2 class="score">Score: </h2>
+    </div>
+
+</body>
+
+</html>
