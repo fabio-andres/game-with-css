@@ -6,4 +6,4 @@
 
 ## Getting Started 🚀
 
-[click here to see the project](https://fabio-andres.github.io/stopwatch/)
+[click here to see the project](https://fabio-andres.github.io/game-with-css/)
