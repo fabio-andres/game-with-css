@@ -1,6 +1,4 @@
-# only movies
-
-movies search app consuming movie db api
+# game with css animations
 
 ## Preview
 
